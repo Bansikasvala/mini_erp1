@@ -20,6 +20,6 @@ class AuthRepositoriesImpl implements AuthRepositoies {
 
   @override
   Future<void> logout() {
-    throw UnimplementedError();
+    return datasource.logout();
   }
 }

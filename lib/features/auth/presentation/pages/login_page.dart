@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
             if (state is AuthError) {
               ScaffoldMessenger.of(
                 context,
-              ).showSnackBar(SnackBar(content: Text("${state.messages}")));
+              ).showSnackBar(SnackBar(content: Text(state.messages)));
             }
           },
           builder: (context, state) {
@@ -101,10 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                                 if (value == null || value.isEmpty) {
                                   return "Enter password";
                                 }
-                                if (value.length < 6) {
-                                  return "Password must be at least 6 characters";
-                                }
-                              },
+                              if (value.length < 6) {
+                                return 'Password must be at least 6 characters';
+                              }
+                              return null;
+                            },
 
                               decoration: InputDecoration(
                                 labelText: "Password",
@@ -117,9 +118,6 @@ class _LoginPageState extends State<LoginPage> {
                         ElevatedButton(
                           onPressed: () {
                             if (formkey.currentState!.validate()) {
-                              print('Email :- ${emailController.text}');
-                              print('Password :- ${passwordController.text}');
-
                               context.read<AuthBloc>().add(
                                 LoginRquestd(
                                   emailController.text,

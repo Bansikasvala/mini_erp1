@@ -11,4 +11,8 @@ class AuthLocalDatasource {
     }
     return false;
   }
+
+  Future<void> logout() async {
+    await Hive.box('session').put('isloggedIn', false);
+  }
 }
